@@ -1,36 +1,47 @@
 import React, { useState, useEffect } from "react";
 import {
-  Spacer,
+  Grid,
   Box,
-  Text,
+  Stack,
   VStack,
   HStack,
   Button,
-  Image
+  Image,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
 } from "@chakra-ui/react";
+import Axios from 'axios';
 
 export default function Category(){
 
     const [allList, setAllList] = useState([]);
 
     useEffect(() => {
-    
-        
-      }, [])
+        getAllList();
+      }, [allList])
 
-    //   async function getAllList() {
-    //     await Axios.get(`https://contenthub-api.eco.astro.com.my/channel/all.json `, {
-    //         params: {
-    //             ID: data.phone
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err)
-    //     }).then((res) => {
-    //         setAllList(res.data.otp)
-    //     })
-    // }
+      async function getAllList() {
+        // await Axios.get(`https://contenthub-api.eco.astro.com.my/channel/all.json `)
+        .catch((err) => {
+            console.log(err)
+        }).then((res) => {
+            setAllList(res.data.response)
+        })
+    }
+
+    const getChannelNameNTitle = (name) => {
+        name.forEach()
+    }
 
     return(
+        <Stack flexDirection="column">
         <HStack spacing="2%">
         <VStack cursor="pointer" w="11%" spacing={0}>
                 <Image borderTopRadius="4px" w="100%" src="https://de-acm-assets.eco.astro.com.my/images/content-hub/channel-categories/chcategory_VariantB_all.jpg" alt="All Channels"/>
@@ -88,5 +99,55 @@ export default function Category(){
                 </Button>
         </VStack>
         </HStack>
+
+
+        <Grid paddingTop="4%" templateColumns="repeat(3, 1fr)" gap={3}>
+            <Box as="button" borderRadius="4px" w="19vw" h="18vh" boxShadow="1px 1px 6px #D3D3D3">
+            <HStack pl="4">
+                <Image src="https://divign0fdw3sv.cloudfront.net/Images/ChannelLogo/contenthub/395_144.png" w="80px" h="100%"/>
+                <VStack left={0}>
+                    <Text>CH101</Text>
+                    <Text fontWeight="bold">TV1 HD</Text>
+                </VStack>
+            </HStack>
+            <Table size="sm">
+  <Thead>
+   <Tr><Th/></Tr>
+  </Thead>
+  <Tbody>
+    <Tr>
+      <Td>inches</Td>
+      <Td>millimetres (mm)</Td>
+    </Tr>
+    <Tr>
+      <Td>feet</Td>
+      <Td>centimetres (cm)</Td>
+    </Tr>
+    <Tr>
+      <Td>yards</Td>
+      <Td>metres (m)</Td>
+    </Tr>
+  </Tbody>
+  <Tfoot>
+ 
+  </Tfoot>
+</Table>
+            </Box>
+            <Box as="button" borderRadius="4px" w="19vw" h="18vh" boxShadow="1px 1px 6px #D3D3D3">
+
+            </Box>
+            <Box as="button" borderRadius="4px" w="19vw" h="18vh" boxShadow="1px 1px 6px #D3D3D3">
+
+            </Box>
+            <Box as="button" borderRadius="4px" w="19vw" h="18vh" boxShadow="1px 1px 6px #D3D3D3">
+
+            </Box>
+            <Box as="button" borderRadius="4px" w="19vw" h="18vh" boxShadow="1px 1px 6px #D3D3D3">
+
+            </Box>
+            
+        </Grid>
+
+</Stack>
     )
 }
