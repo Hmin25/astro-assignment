@@ -25,7 +25,7 @@ export default function Channel() {
         <Box w="100vw" h="50vh" bg="black">
             {/* <SlideShow/> */}
         </Box>
-        <Box w="100vw" h="100vh" px="19.7%">
+        <Box w="100vw" h="100vh" px="19.7%" overflowY="scroll">
             <Flex flexDirection="column" pt="32px">
                 <Flex align="baseline" pt="32px">
                 <Text color="#333333" fontSize="32px" fontWeight="750">Category</Text>
