@@ -17,59 +17,18 @@ import {
   Td,
   TableCaption,
 } from "@chakra-ui/react";
-import Axios from "axios";
 
-export default function Category() {
-  const [allChannels, setAllList] = useState([]);
-  const [scheduleTime, setScheduleTime] = useState("");
-  const [scheduleTitle, setScheduleTitle] = useState("");
-
-  useEffect(() => {
-    getAllList();
-  }, []);
-
-  async function getAllList() {
-    await Axios.get(`https://contenthub-api.eco.astro.com.my/channel/all.json `)
-      .catch((err) => {
-        console.log(err);
-      })
-      .then((res) => {
-        setAllList(res.data.response);
-        console.log(res.data.response);
-
-        // for (let i = 0; i < res.data.response.length; i++) {
-        //   console.log(
-        //     "Item ",
-        //     i,
-        //     " .currentSchedule is: ",
-        //     res.data.response[i].currentSchedule[0].title
-        //   );
-        // }
-      });
-  }
-
-  // const scratchInfo = () => {
-  //   allChannels.map((currentSchedule) => {
-  //     currentSchedule.forEach((schedule) => {
-  //       setScheduleTitle(schedule.title);
-
-  //       tempScheduleTime = schedule.datetime;
-
-  //       setScheduleTime(tempScheduleTime.substring(10,15));
-  //     })
-  //   })
-  //   scratchInfo();
-  // }
-
+export default function Category({ categoryData }) {
   const displayChannelInfo = () => {
-    if (allChannels && allChannels.length > 0) {
-      return allChannels.map((channel) => (
+    if (categoryData && categoryData.length > 0) {
+      return categoryData.map((channel, index) => (
         <Box
           as="button"
           borderRadius="4px"
-          w="19vw"
+          w="20vw"
           h="18vh"
           boxShadow="1px 1px 6px #D3D3D3"
+          key={index}
         >
           <HStack pl="4">
             <Image src={channel.originalImage} w="70px" h="100%" />
@@ -94,20 +53,28 @@ export default function Category() {
                 </Td>
               </Tr>
               <Tr>
-                <Td>{channel.currentSchedule.length > 1
-                    ? channel.currentSchedule[1].datetime.substring(10,16)
-                    : "-"}</Td>
-                <Td>{channel.currentSchedule.length > 1
+                <Td>
+                  {channel.currentSchedule.length > 1
+                    ? channel.currentSchedule[1].datetime.substring(10, 16)
+                    : "-"}
+                </Td>
+                <Td>
+                  {channel.currentSchedule.length > 1
                     ? channel.currentSchedule[1].title
-                    : "No schedule"}</Td>
+                    : "No schedule"}
+                </Td>
               </Tr>
               <Tr>
-                <Td>{channel.currentSchedule.length > 2
-                    ? channel.currentSchedule[2].datetime.substring(10,16)
-                    : "-"}</Td>
-                <Td>{channel.currentSchedule.length > 2
+                <Td>
+                  {channel.currentSchedule.length > 2
+                    ? channel.currentSchedule[2].datetime.substring(10, 16)
+                    : "-"}
+                </Td>
+                <Td>
+                  {channel.currentSchedule.length > 2
                     ? channel.currentSchedule[2].title
-                    : "No schedule"}</Td>
+                    : "No schedule"}
+                </Td>
               </Tr>
             </Tbody>
             <Tfoot></Tfoot>
@@ -223,7 +190,7 @@ export default function Category() {
         gap={3}
         overflowY="auto"
       >
-        {allChannels && displayChannelInfo()}
+        {displayChannelInfo()}
       </Grid>
     </Stack>
   );
