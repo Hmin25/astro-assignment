@@ -38,7 +38,6 @@ export default function Channel() {
 
   const onClickSearch = () => {
 
-    console.log("InputData is: ", inputData);
     let tempChannelList = [];
     for (let i = 0; i < allChannels.length; i++) {
       if (
@@ -104,7 +103,6 @@ export default function Channel() {
               bgColor="#E6165D"
               cursor="pointer"
               onClick={() => {
-                console.log("Is clicked!");
                 var a = document.querySelector(
                   "input[name=searchKeyword]"
                 ).value;

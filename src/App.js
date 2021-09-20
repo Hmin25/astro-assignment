@@ -1,41 +1,40 @@
-import './App.css';
-import React, {useState} from "react"
+import "./App.css";
+import React, { useState } from "react";
 import {
   Center,
   ChakraProvider,
   HStack,
   Flex,
   VStack,
-  Image
-} from "@chakra-ui/react"
-import {Switch, Route, useHistory} from "react-router-dom";
-import Channel from './components/Channel';
+  Image,
+} from "@chakra-ui/react";
+import {
+  Switch,
+  Route,
+  useHistory,
+  BrowserRouter as Router,
+} from "react-router-dom";
+import Channel from "./components/Channel";
 import Header from "./components/Header";
-import ChannelFullDetails from './components/ChannelFullDetails';
-
+import ChannelFullDetails from "./components/ChannelFullDetails";
 
 function App() {
   return (
     <ChakraProvider>
-      <Route exact path="/">
-      <Flex flexDir="row" overflowY="auto" overflowX="hidden">
-      <VStack spacing={0}>
+      <Router>
         <Header />
-      <Channel/>
-      </VStack>
-      </Flex>
-      </Route>
+        <Switch>
+          <Route exact path="/">
+            <Flex flexDir="row" overflowY="auto" overflowX="hidden">
+              <VStack spacing={0}>
+                <Channel />
+              </VStack>
+            </Flex>
+          </Route>
 
-      {/* <Route path="/channel/:id" component={ChannelFullDetails}/> */}
-      <Route path="/channel/detail">
-      {/* <Flex flexDir="row" overflowY="auto" overflowX="hidden">
-      <VStack spacing={0}> */}
-        <Header />
-      <ChannelFullDetails/>
-      {/* </VStack>
-      </Flex> */}
-      </Route>
-
+          <Route path="/channel/:name-:id" component={ChannelFullDetails} />
+        </Switch>
+      </Router>
     </ChakraProvider>
   );
 }

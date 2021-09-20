@@ -69,7 +69,6 @@ export default function Filter({ dataFromParent, setFilteredData }) {
           }
         }
       }
-      console.log("tempFilteredData111 ", tempFilteredData);
       setFilteredData(tempFilteredData);
     } else {
       let tempChannelNameList = [];
@@ -99,14 +98,8 @@ export default function Filter({ dataFromParent, setFilteredData }) {
           }
         }
       }
-      console.log("tempFilteredData2222 ", tempFilteredData);
       setFilteredData(tempFilteredData);
     }
-    // if (minChannelNum != null && maxChannelNum != null) {
-    //   sortByChannelNumber();
-    // } else {
-    //   setFilteredData(tempFilteredData);
-    // }
   }
 
   function sortByChannelNumber() {
