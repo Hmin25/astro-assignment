@@ -13,9 +13,9 @@ import {
 import Axios from "axios";
 import Header from "./Header";
 import Filter from "./Filter";
-import Category from "./Category";
 import SlideShow from "./SlideShow";
 import { Search2Icon } from "@chakra-ui/icons";
+import ChannelDetail from "./ChannelDetail";
 
 export default function Channel() {
   const [inputData, setInputData] = useState("");
@@ -72,7 +72,7 @@ export default function Channel() {
   }, []);
 
   const displayCurrentCategory = () => {
-    return <Category categoryData={filteredData} />;
+    return <ChannelDetail categoryData={filteredData} />;
   };
 
 
@@ -96,7 +96,6 @@ export default function Channel() {
               placeholder="Search Channels, TV Shows, Movies"
               name="searchKeyword"
               onBlur={(e) => {
-                console.log("Hey blurred");
                 setInputData(e.target.value);
               }}
             />
@@ -109,10 +108,8 @@ export default function Channel() {
                 var a = document.querySelector(
                   "input[name=searchKeyword]"
                 ).value;
-                console.log("started timeout, a is: ", a);
                 setTimeout(() => {
                   onClickSearch();
-                  console.log("after 0.5");
                 }, 0);
               }}
             >
@@ -129,7 +126,7 @@ export default function Channel() {
               Category
             </Text>
             <Spacer />
-            <Filter />
+            <Filter dataFromParent={allChannels} setFilteredData={setFilteredData}/>
           </Flex>
 
           {filteredData && displayCurrentCategory()}

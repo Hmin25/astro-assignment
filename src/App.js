@@ -11,6 +11,7 @@ import {
 import {Switch, Route, useHistory} from "react-router-dom";
 import Channel from './components/Channel';
 import Header from "./components/Header";
+import ChannelFullDetails from './components/ChannelFullDetails';
 
 
 function App() {
@@ -24,6 +25,17 @@ function App() {
       </VStack>
       </Flex>
       </Route>
+
+      {/* <Route path="/channel/:id" component={ChannelFullDetails}/> */}
+      <Route path="/channel/detail">
+      {/* <Flex flexDir="row" overflowY="auto" overflowX="hidden">
+      <VStack spacing={0}> */}
+        <Header />
+      <ChannelFullDetails/>
+      {/* </VStack>
+      </Flex> */}
+      </Route>
+
     </ChakraProvider>
   );
 }

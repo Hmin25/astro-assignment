@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useHistory} from "react-router-dom";
 import {
   Grid,
   Box,
@@ -18,7 +19,11 @@ import {
   TableCaption,
 } from "@chakra-ui/react";
 
-export default function Category({ categoryData }) {
+export default function ChannelDetail({ categoryData }) {
+
+  const [currentChannelId, setCurrentChannelId] = useState("");
+  const history = useHistory();
+
   const displayChannelInfo = () => {
     if (categoryData && categoryData.length > 0) {
       return categoryData.map((channel, index) => (
@@ -29,10 +34,15 @@ export default function Category({ categoryData }) {
           h="18vh"
           boxShadow="1px 1px 6px #D3D3D3"
           key={index}
+          onClick={() => {
+            setCurrentChannelId(channel.id);
+            // history.push(`/channel/${channel.title}${channel.id}`);
+            history.push("/channel/detail", currentChannelId);
+          }}
         >
           <HStack pl="4">
             <Image src={channel.originalImage} w="70px" h="100%" />
-            <VStack>
+            <VStack align="self-start" spacing={0}>
               <Text>{channel.stbNumber}</Text>
               <Text fontWeight="bold">{channel.title}</Text>
             </VStack>
