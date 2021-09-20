@@ -24,7 +24,7 @@ import filter from "../assets/filter.png";
 export default function Filter({ dataFromParent, setFilteredData }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
   const [tempDisplayData, setTempDisplayData] = useState();
   const [minChannelNum, setMinChannelNum] = useState("");
   const [maxChannelNum, setMaxChannelNum] = useState("");
@@ -33,12 +33,12 @@ export default function Filter({ dataFromParent, setFilteredData }) {
     sortOrder();
   }, [tempDisplayData, value]);
 
-  useEffect(() => {
-    setMinChannelNum("");
-    setMaxChannelNum("");
-    setValue(null);
-    setFilteredData(dataFromParent);
-  }, [onClose]);
+  // useEffect(() => {
+  //   setMinChannelNum("");
+  //   setMaxChannelNum("");
+  //   setValue("");
+  //   setFilteredData(dataFromParent);
+  // }, [onClose]);
 
   function sortOrder() {
     if (tempDisplayData && tempDisplayData != null) {
@@ -82,8 +82,10 @@ export default function Filter({ dataFromParent, setFilteredData }) {
 
       if (value === "asc") {
         tempChannelNameList.sort();
-      } else {
+      } else if(value === "desc"){
         tempChannelNameList.sort().reverse();
+      } else{
+        return;
       }
 
       let tempFilteredData = [];
@@ -227,7 +229,7 @@ export default function Filter({ dataFromParent, setFilteredData }) {
                 onClose();
                 setMinChannelNum("");
                 setMaxChannelNum("");
-                setValue("asc");
+                setValue("");
                 setFilteredData(dataFromParent);
               }}
             >
