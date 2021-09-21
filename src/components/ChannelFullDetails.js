@@ -9,12 +9,19 @@ import {
   Flex,
   Button,
   Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
 } from "@chakra-ui/react";
 import Axios from "axios";
-import Header from "./Header";
 
 export default function ChannelFullDetails() {
   const [currentChannelData, setCurrentChannelData] = useState([]);
+  const [individualDayData, setIndividualDayData] = useState([]);
+  const [fullScheduleData, setFullScheduleData] = useState([]);
   const history = useHistory();
 
   let { id, name } = useParams();
@@ -29,30 +36,61 @@ export default function ChannelFullDetails() {
     SATURDAY: 6,
   };
 
-  let day = new Date().getDay();
-  let currentDay;
-  function sorting() {
-    switch (day) {
+  // let day = new Date().getDay();
+  // let currentDay;
+  // function sorting() {
+  //   switch (day) {
+  //     case DAY.SUNDAY:
+  //       currentDay = "SUN";
+  //       break;
+  //     case DAY.MONDAY:
+  //       currentDay = "MON";
+  //       break;
+  //     case DAY.TUESDAY:
+  //       currentDay = "TUE";
+  //       break;
+  //     case DAY.WEDNESDAY:
+  //       currentDay = "WED";
+  //       break;
+  //     case DAY.THURSDAY:
+  //       currentDay = "THU";
+  //       break;
+  //     case DAY.FRIDAY:
+  //       currentDay = "FRI";
+  //       break;
+  //     case DAY.SATURDAY:
+  //       currentDay = "SAT";
+  //       break;
+  //     default:
+  //       console.log("Not supposed to see this! Day is not within SUN to SAT");
+  //       break;
+  //   }
+  // }
+
+  const actualToday = new Date().getDay();
+
+  function getDayStringBasedOnNumber(dayNumber) {
+    switch (dayNumber) {
       case DAY.SUNDAY:
-        currentDay = "SUN";
+        return "SUN";
         break;
       case DAY.MONDAY:
-        currentDay = "MON";
+        return "MON";
         break;
       case DAY.TUESDAY:
-        currentDay = "TUE";
+        return "TUE";
         break;
       case DAY.WEDNESDAY:
-        currentDay = "WED";
+        return "WED";
         break;
       case DAY.THURSDAY:
-        currentDay = "THU";
+        return "THU";
         break;
       case DAY.FRIDAY:
-        currentDay = "FRI";
+        return "FRI";
         break;
       case DAY.SATURDAY:
-        currentDay = "SAT";
+        return "SAT";
         break;
       default:
         console.log("Not supposed to see this! Day is not within SUN to SAT");
@@ -73,6 +111,26 @@ export default function ChannelFullDetails() {
           let data = [];
           data.push(res.data.response);
 
+          let scheduleData = Object.values(data[0].schedule);
+
+          // First one is always today
+          scheduleData[0].currentDay = "TODAY";
+          scheduleData[0].currentDayNumber = actualToday;
+
+          // scheduleData.length is always 7
+          for (let i = 1; i < scheduleData.length; i++) {
+            let currentDayNumber =
+              scheduleData[i - 1].currentDayNumber + 1 > 6
+                ? scheduleData[i - 1].currentDayNumber + 1 - 7
+                : scheduleData[i - 1].currentDayNumber + 1;
+            scheduleData[i].currentDayNumber = currentDayNumber;
+            scheduleData[i].currentDay =
+              getDayStringBasedOnNumber(currentDayNumber);
+          }
+
+          console.log("scheduleData: ", scheduleData);
+          setFullScheduleData(scheduleData);
+          setIndividualDayData(scheduleData[0]);
           setCurrentChannelData(data);
         });
     }
@@ -80,8 +138,12 @@ export default function ChannelFullDetails() {
   }, []);
 
   // useEffect(() => {
-  //   getDayData();
-  // }, []);
+  //   displayDayButtons();
+  // }, [currentChannelData]);
+
+  // useEffect(() => {
+  //   calculateFullScheduleDays();
+  // }, [currentChannelData]);
 
   const displayCurrentChannelData = () => {
     if (currentChannelData && currentChannelData.length > 0) {
@@ -102,85 +164,118 @@ export default function ChannelFullDetails() {
     }
   };
 
-  const getDays = () => {
-    let dayList = [];
+  const displayDayButtons = () => {
     if (currentChannelData && currentChannelData.length > 0) {
       //get all schedule data of current channel
       let scheduleData = Object.values(currentChannelData[0].schedule);
+      // setSchedule(scheduleData);
 
-      return scheduleData.map((schedule) => {
-        if (schedule === scheduleData[0]) {
-          day = day;
-          currentDay = "TODAY";
-        } else {
-          if (day > 5) {
-            day = 0;
-            sorting();
-          } else {
-            day++;
-            sorting();
-          }
-        }
-
-        return (
-          <Button
-            textAlign="left"
-            size="sm"
-            bg="none"
-            _hover={{ bg: "none", fontWeight: "bold" }}
-            // onClick={() => getDayData(dayData={schedule})}
-            // onClick={() => getDayData(dayData={scheduleData[i]})}
-          >
-            {currentDay}
-          </Button>
-        );
-      });
-      //   for (let i = 0; i < scheduleData.length; i++) {
-
-      //     if (i === 0) {
-      //       day = day;
+      //#region Hmin
+      // Schedule Data is 7 days
+      // return scheduleData.map((schedule) => {
+      //   // schedule is 1 day
+      //   if (schedule === scheduleData[0]) {
+      //     day = day;
+      //     currentDay = "TODAY";
+      //   } else {
+      //     if (day > 5) {
+      //       day = 0;
       //       sorting();
-      //       dayList.push(currentDay);
       //     } else {
-      //       if (day > 5) {
-      //         day = 0;
-      //         sorting();
-      //         dayList.push(currentDay);
-      //       } else {
-      //         day++;
-      //         sorting();
-      //         dayList.push(currentDay);
-      //       }
+      //       day++;
+      //       sorting();
       //     }
       //   }
 
-      //   dayList.forEach(() => {
-      //     return (
-      //           <Button
-      //             textAlign="left"
-      //             size="sm"
-      //             bg="none"
-      //             _hover={{ bg: "none", fontWeight: "bold" }}
-      //             // onClick={() => getDayData(dayData={schedule})}
-      //             // onClick={() => getDayData(dayData={scheduleData[i]})}
-      //           >
-      //             {dayList}
-      //           </Button>
-      //         );
-      //   })
+      //   // 7 buttons showing
+      //   return (
+      //     <Button
+      //       textAlign="left"
+      //       size="sm"
+      //       bg="none"
+      //       _hover={{ bg: "none", fontWeight: "bold" }}
+      //       onClick={() => {
+      //         // displayInvididualDayData(schedule);
+      //         setIndividualDayData(schedule);
+      //         console.log("Clicked!");
+      //       }}
+      //     >
+      //       {currentDay}
+      //     </Button>
+      //   );
+      // });
+
+      //#endregion
     }
   };
 
-  // function getDayData(dayData) {
-  //   if (dayData && dayData.length > 0) {
-  //     return dayData.map((currentData, index) => (
-  //       <HStack align="start" spacing="8px">
-  //         <Text>on Now</Text>
-  //         <Text>Title</Text>
-  //       </HStack>
-  //     ));
+  // const calculateFullScheduleDays = () => {
+  //   console.log("currentChannelData: ", currentChannelData);
+  //   if (currentChannelData && currentChannelData.length > 0) {
+  //     //get all schedule data of current channel
+  //     let scheduleData = Object.values(currentChannelData[0].schedule);
+
+  //     // First one is always today
+  //     scheduleData[0].currentDay = "TODAY";
+  //     scheduleData[0].currentDayNumber = actualToday;
+
+  //     // scheduleData.length is always 7
+  //     for (let i = 1; i < scheduleData.length; i++) {
+  //       let currentDayNumber =
+  //         scheduleData[i - 1].currentDayNumber + 1 > 6
+  //           ? scheduleData[i - 1].currentDayNumber + 1 - 7
+  //           : scheduleData[i - 1].currentDayNumber + 1;
+  //       scheduleData[i].currentDayNumber = currentDayNumber;
+  //       scheduleData[i].currentDay =
+  //         getDayStringBasedOnNumber(currentDayNumber);
+  //     }
+
+  //     setFullScheduleData(scheduleData);
   //   }
-  // }
+  // };
+
+  const displayDayButtonsVersion2 = () => {
+    return fullScheduleData.map((schedule, index) => (
+      <Button
+        key={index}
+        textAlign="left"
+        size="sm"
+        bg="none"
+        _hover={{ bg: "none", fontWeight: "bold" }}
+        onClick={() => {
+          // displayInvididualDayData(schedule);
+          setIndividualDayData(schedule);
+          console.log("Clicked!");
+        }}
+      >
+        {schedule.currentDay}
+      </Button>
+    ));
+  };
+
+  const displayInvididualDayData = () => {
+    if (individualDayData.length > 0) {
+      return individualDayData.map((currentData, index) => (
+        <>
+          {/* <HStack spacing="50px" height="8vh">
+            <Text>{currentData.datetime.substring(10, 16)}</Text>
+            <Text>{currentData.title}</Text>
+          </HStack> */}
+          <Table variant="unstyled" align="flex-start" size="sm" overflowY="hidden">
+            <Thead/>
+            <Tbody>
+              <Tr>
+                <Td>{currentData.datetime.substring(10, 16)}</Td>
+                <Td>
+                {currentData.title}
+                </Td>
+              </Tr>
+              </Tbody>
+              </Table>
+        </>
+      ));
+    }
+  };
 
   return (
     <>
@@ -206,8 +301,12 @@ export default function ChannelFullDetails() {
       <Flex px="32%" pt="3%" flexDir="column">
         {displayCurrentChannelData()}
         <HStack fontSize="12px" fontWeight="400" spacing={0} pt="6%">
-          {getDays()}
+          {/* {displayDayButtons()} */}
+          {fullScheduleData.length > 0 && displayDayButtonsVersion2()}
         </HStack>
+        <VStack h="100vh" pt="3%" align="start" spacing="8px">
+          {individualDayData.length > 0 && displayInvididualDayData()}
+        </VStack>
       </Flex>
     </>
   );
