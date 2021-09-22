@@ -13,7 +13,7 @@ import {
 import Axios from "axios";
 import Header from "./Header";
 import Filter from "./Filter";
-import SlideShow from "./SlideShow";
+import SlideShow from "./SlideShow/SlideShow"
 import { Search2Icon } from "@chakra-ui/icons";
 import ChannelDetail from "./ChannelDetail";
 
@@ -77,12 +77,12 @@ export default function Channel() {
 
   return (
     <>
-      <Box w="100vw" h="50vh" bg="black">
+      <Box w="100vw" h={["30vh","30vh","30vh","50vh"]} bg="black" overflowX="hidden">
         <Box
           pt="25px"
           align="center"
           color="white"
-          fontSize="32px"
+          fontSize={["22px","22px","25px","32px"]}
           fontWeight="750"
         >
           CONTENT GUIDE
@@ -115,12 +115,12 @@ export default function Channel() {
             </InputRightAddon>
           </InputGroup>
         </Stack>
-        {/* <SlideShow/> */}
+        <SlideShow/>
       </Box>
-      <Box w="100vw" h="100vh" px="18%" overflowY="scroll">
-        <Flex flexDirection="column" pt="32px">
-          <Flex align="baseline" pt="32px">
-            <Text color="#333333" fontSize="32px" fontWeight="750">
+      <Box w="100vw" h="100vh" px={["2%","2%","12%","18%"]} overflowY="scroll">
+        <Flex flexDirection="column" pt={["22px","22px","25px","32px"]}>
+          <Flex align="baseline" pt={["22px","22px","25px","32px"]}>
+            <Text color="#333333" fontSize={["22px","22px","25px","32px"]} fontWeight="750">
               Category
             </Text>
             <Spacer />

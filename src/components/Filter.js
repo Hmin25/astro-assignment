@@ -29,19 +29,13 @@ export default function Filter({ dataFromParent, setFilteredData }) {
   const [minChannelNum, setMinChannelNum] = useState("");
   const [maxChannelNum, setMaxChannelNum] = useState("");
 
-  useEffect(() => {
-    sortOrder();
-  }, [tempDisplayData, value]);
-
   // useEffect(() => {
-  //   setMinChannelNum("");
-  //   setMaxChannelNum("");
-  //   setValue("");
-  //   setFilteredData(dataFromParent);
-  // }, [onClose]);
+  //   sortOrder();
+  // }, [tempDisplayData, value]);
+
 
   function sortOrder() {
-    if (tempDisplayData && tempDisplayData != null) {
+    if (tempDisplayData && tempDisplayData != null && tempDisplayData != undefined) {
       let tempChannelNameList = [];
 
       if (tempDisplayData && tempDisplayData.length > 0) {
@@ -224,6 +218,7 @@ export default function Filter({ dataFromParent, setFilteredData }) {
                 setMaxChannelNum("");
                 setValue("");
                 setFilteredData(dataFromParent);
+                setTempDisplayData();
               }}
             >
               RESET
@@ -237,6 +232,10 @@ export default function Filter({ dataFromParent, setFilteredData }) {
               onClick={() => {
                 if (minChannelNum != null && maxChannelNum != null) {
                   sortByChannelNumber();
+                  sortOrder();
+                }
+                else{
+                  sortOrder();
                 }
                 // sortOrder();
                 onClose();

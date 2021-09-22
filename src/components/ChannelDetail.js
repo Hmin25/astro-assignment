@@ -30,22 +30,22 @@ export default function ChannelDetail({ categoryData }) {
         <Box
           as="button"
           borderRadius="4px"
-          w="20vw"
-          h="18vh"
+          w={["48vw","48vw","20vw","20vw"]}
+          h={["22vh","22vh","19vh","19vh"]}
           boxShadow="1px 1px 6px #D3D3D3"
           key={index}
           onClick={() => {
             history.push(`/channel/${channel.title}-${channel.id}`);
           }}
         >
-          <HStack pl="4">
-            <Image src={channel.originalImage} w="70px" h="100%" />
+          <HStack pl={["0","0","2","4"]}>
+            <Image src={channel.originalImage} w={["40px","40px","50px","70px"]} h="100%" />
             <VStack align="self-start" spacing={0}>
-              <Text>CH{channel.stbNumber}</Text>
-              <Text fontWeight="bold">{channel.title}</Text>
+              <Text fontSize={["8px", "10px", "10px", "14px"]}>CH{channel.stbNumber}</Text>
+              <Text fontSize={["8px", "10px", "10px", "14px"]} fontWeight="bold">{channel.title}</Text>
             </VStack>
           </HStack>
-          <Table variant="unstyled" size="sm" overflowY="hidden">
+          <Table fontSize={["8px", "10px", "10px", "14px"]} variant="unstyled" size="sm" overflowY="hidden">
             <Thead>
               <Tr>
                 <Th />
@@ -53,32 +53,32 @@ export default function ChannelDetail({ categoryData }) {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>on Now</Td>
-                <Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>on Now</Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>
                   {channel.currentSchedule.length > 0
                     ? channel.currentSchedule[0].title
                     : "No schedule"}
                 </Td>
               </Tr>
               <Tr>
-                <Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>
                   {channel.currentSchedule.length > 1
                     ? channel.currentSchedule[1].datetime.substring(10, 16)
                     : "-"}
                 </Td>
-                <Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>
                   {channel.currentSchedule.length > 1
                     ? channel.currentSchedule[1].title
                     : "No schedule"}
                 </Td>
               </Tr>
               <Tr>
-                <Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>
                   {channel.currentSchedule.length > 2
                     ? channel.currentSchedule[2].datetime.substring(10, 16)
                     : "-"}
                 </Td>
-                <Td>
+                <Td fontSize={["8px", "10px", "10px", "14px"]}>
                   {channel.currentSchedule.length > 2
                     ? channel.currentSchedule[2].title
                     : "No schedule"}
@@ -103,7 +103,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="All Channels"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+            <Text fontSize={["8px", "10px", "10px", "14px"]}>
             All Channels
+            </Text>
           </Button>
         </VStack>
 
@@ -115,7 +117,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="Sports"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Sports
+            </Text>
           </Button>
         </VStack>
 
@@ -127,7 +131,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="Malay"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Malay
+            </Text>
           </Button>
         </VStack>
 
@@ -139,7 +145,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="Indian"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Indian
+            </Text>
           </Button>
         </VStack>
 
@@ -151,7 +159,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="Chinese"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Chinese
+            </Text>
           </Button>
         </VStack>
 
@@ -163,7 +173,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="International"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             International
+            </Text>
           </Button>
         </VStack>
 
@@ -175,7 +187,9 @@ export default function ChannelDetail({ categoryData }) {
             alt="Astro First"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Astro First
+            </Text>
           </Button>
         </VStack>
 
@@ -187,14 +201,16 @@ export default function ChannelDetail({ categoryData }) {
             alt="Astro Best"
           />
           <Button borderBottomRadius="4px" borderTopRadius="0px" h="8" w="100%">
+          <Text fontSize={["8px", "10px", "10px", "14px"]}>
             Astro Best
+            </Text>
           </Button>
         </VStack>
       </HStack>
 
       <Grid
         paddingTop="4%"
-        templateColumns="repeat(3, 1fr)"
+        templateColumns={["repeat(2, 1fr)","repeat(2, 1fr)","repeat(3, 1fr)","repeat(3, 1fr)"]}
         gap={3}
         overflowY="auto"
       >

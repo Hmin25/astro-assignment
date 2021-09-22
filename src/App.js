@@ -22,7 +22,9 @@ function App() {
   return (
     <ChakraProvider>
       <Router>
+      <Flex flexDir="column" overflowY="auto" overflowX="hidden">
         <Header />
+        </Flex>
         <Switch>
           <Route exact path="/">
             <Flex flexDir="row" overflowY="auto" overflowX="hidden">
