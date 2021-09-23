@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/astro-assignment/static/css/main.99a48500.chunk.css",
+    "main.js": "/astro-assignment/static/js/main.fd69db0a.chunk.js",
+    "main.js.map": "/astro-assignment/static/js/main.fd69db0a.chunk.js.map",
+    "runtime-main.js": "/astro-assignment/static/js/runtime-main.973d3490.js",
+    "runtime-main.js.map": "/astro-assignment/static/js/runtime-main.973d3490.js.map",
+    "static/css/2.b2da9fe0.chunk.css": "/astro-assignment/static/css/2.b2da9fe0.chunk.css",
+    "static/js/2.2266aad5.chunk.js": "/astro-assignment/static/js/2.2266aad5.chunk.js",
+    "static/js/2.2266aad5.chunk.js.map": "/astro-assignment/static/js/2.2266aad5.chunk.js.map",
+    "static/js/3.323398d8.chunk.js": "/astro-assignment/static/js/3.323398d8.chunk.js",
+    "static/js/3.323398d8.chunk.js.map": "/astro-assignment/static/js/3.323398d8.chunk.js.map",
+    "index.html": "/astro-assignment/index.html",
+    "static/css/2.b2da9fe0.chunk.css.map": "/astro-assignment/static/css/2.b2da9fe0.chunk.css.map",
+    "static/css/main.99a48500.chunk.css.map": "/astro-assignment/static/css/main.99a48500.chunk.css.map",
+    "static/js/2.2266aad5.chunk.js.LICENSE.txt": "/astro-assignment/static/js/2.2266aad5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.973d3490.js",
+    "static/css/2.b2da9fe0.chunk.css",
+    "static/js/2.2266aad5.chunk.js",
+    "static/css/main.99a48500.chunk.css",
+    "static/js/main.fd69db0a.chunk.js"
+  ]
+}
